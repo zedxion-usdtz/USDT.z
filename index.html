@@ -1,52 +1,196 @@
-<body>
-  <div class="container">
-    <div class="brand">
-      <div class="brand-logo" style="padding: 0;">
-        <img src="logo-zedxion.png" alt="ZEDXION Logo" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;" />
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>USDT.z - The Luxury Standard on BNB Smart Chain</title>
+  <!-- Tailwind CSS CDN for a modern and responsive design -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts for a clean, sophisticated font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #0c0a09; /* Very dark background for a luxury feel */
+      color: #e2e8f0; /* Light text color */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 1rem;
+      background-image: radial-gradient(at 0% 0%, #1c1917 0%, #0c0a09 50%, #0c0a09 100%);
+    }
+
+    /* Custom styles for a luxurious gradient effect */
+    .brand-name {
+      background-image: linear-gradient(90deg, #f5d38a, #c5a463, #f5d38a);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: gradient-shift 3s ease infinite alternate;
+    }
+
+    @keyframes gradient-shift {
+      0% {
+        background-position: 0% 50%;
+      }
+      100% {
+        background-position: 100% 50%;
+      }
+    }
+
+    /* Gradient border for a premium container */
+    .container {
+      border: 1px solid transparent;
+      border-image: linear-gradient(to bottom right, #f5d38a, #4a5568, #c5a463) 1;
+      animation: border-glow 2s ease-in-out infinite alternate;
+    }
+    
+    @keyframes border-glow {
+      0% { box-shadow: 0 0 5px #c5a463; }
+      100% { box-shadow: 0 0 20px #f5d38a, 0 0 30px #c5a463; }
+    }
+
+    /* SVG icon styling for a premium look */
+    .icon {
+      fill: #f5d38a;
+      transition: transform 0.3s ease;
+    }
+    .icon:hover {
+      transform: scale(1.1);
+    }
+  </style>
+</head>
+<body class="antialiased">
+  <!-- Main container with luxury styling -->
+  <div class="container bg-zinc-900 p-6 sm:p-10 rounded-3xl shadow-2xl max-w-2xl w-full flex flex-col items-center space-y-8">
+    
+    <!-- Brand and Title Section with animated gradient text -->
+    <div class="brand flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-6 text-center sm:text-left">
+      <!-- Logo with the provided URL -->
+      <div class="brand-logo w-28 h-28 rounded-full p-1 flex-shrink-0 bg-gradient-to-br from-amber-400 to-yellow-600 shadow-xl">
+        <img src="https://zedxion-usdtz.github.io/USDT.z/logo-zedxion.PNG" alt="ZEDXION Logo" class="w-full h-full rounded-full object-cover border-4 border-zinc-900" onerror="this.onerror=null;this.src='https://placehold.co/112x112/c5a463/0c0a09?text=ZEDXION'" />
       </div>
       <div>
-        <div class="brand-name">USDT.z</div>
-        <div class="subtitle">
-          Bridged <span class="highlight">Tether USD (ZED20)</span> on <b>BNB Smart Chain</b><br>
-          <span style="font-size:1em;">Elite BEP20-compliant, fully backed, ultra-secure, luxury-grade.</span>
+        <div class="brand-name text-5xl sm:text-6xl font-bold">USDT.z</div>
+        <div class="subtitle mt-2 text-zinc-400">
+          Bridged <span class="highlight text-zinc-200 font-semibold">Tether USD (ZED20)</span> on <b>BNB Smart Chain</b><br>
+          <span class="text-sm sm:text-base">Elite BEP20-compliant, fully backed, ultra-secure, luxury-grade.</span>
         </div>
       </div>
     </div>
 
-    <div>
-      <div class="token-address" id="tokenAddr">0xYourTokenAddressHere</div>
-      <button class="add-wallet-btn" onclick="addToWallet()">Add to MetaMask</button>
+    <!-- Token Address and Action Buttons Section -->
+    <div class="flex flex-col items-center w-full space-y-4 mt-6">
+      <div class="relative w-full max-w-md">
+        <div class="token-address bg-zinc-800 text-zinc-300 font-mono text-sm sm:text-base p-3 pr-12 rounded-xl w-full text-center break-all transition-colors duration-200 hover:bg-zinc-700 cursor-pointer" id="tokenAddr" onclick="copyToClipboard()">
+          0xYourTokenAddressHere
+        </div>
+        <!-- Copy to clipboard button with SVG icon -->
+        <button id="copyBtn" onclick="copyToClipboard()" class="absolute right-2 top-1/2 -translate-y-1/2 p-2 rounded-lg bg-zinc-700 hover:bg-amber-500 transition-colors duration-200">
+          <svg class="w-5 h-5 text-zinc-400 hover:text-white" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" />
+            <path d="M6 3a2 2 0 00-2 2v11a2 2 0 002 2h4a2 2 0 002-2V5a2 2 0 00-2-2H6zm0 2h4v11H6V5z" />
+            <path d="M14 4a1 1 0 00-1 1v9a1 1 0 102 0V5a1 1 0 00-1-1z" />
+          </svg>
+        </button>
+        <span id="copyMessage" class="absolute top-full mt-1 left-1/2 -translate-x-1/2 text-sm text-green-400 opacity-0 transition-opacity duration-300"></span>
+      </div>
+
+      <button onclick="addToWallet()" class="add-wallet-btn px-10 py-4 bg-gradient-to-r from-amber-500 to-yellow-600 hover:from-amber-600 hover:to-yellow-700 text-zinc-900 font-bold text-lg rounded-full shadow-lg transition-transform duration-200 transform hover:scale-105 active:scale-95 focus:outline-none focus:ring-4 focus:ring-yellow-500">
+        Add to MetaMask
+      </button>
     </div>
 
-    <ul class="features">
-      <li>BEP20-compliant and audited</li>
-      <li>Fully backed by reserves</li>
-      <li>Ultra-secure &amp; scalable smart contract</li>
-      <li>Instant swap and transfer on BNB Chain</li>
-      <li>Compatible with all leading wallets &amp; DEXs</li>
+    <!-- Features List Section with elegant SVG icons -->
+    <ul class="features text-center text-lg space-y-4 mt-8 w-full max-w-md">
+      <li class="flex items-center justify-center space-x-3">
+        <svg class="h-6 w-6 icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 11.08V12a10 10 0 1 1-5.93-8.68"/>
+          <polyline points="22 4 12 14.01 9 11.01"/>
+        </svg>
+        <span>BEP20-compliant and audited</span>
+      </li>
+      <li class="flex items-center justify-center space-x-3">
+        <svg class="h-6 w-6 icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2L2 7l10 5l10-5l-10-5zM2 17l10 5l10-5M2 12l10 5l10-5"></path>
+        </svg>
+        <span>Fully backed by reserves</span>
+      </li>
+      <li class="flex items-center justify-center space-x-3">
+        <svg class="h-6 w-6 icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+          <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+        </svg>
+        <span>Ultra-secure & scalable smart contract</span>
+      </li>
+      <li class="flex items-center justify-center space-x-3">
+        <svg class="h-6 w-6 icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="12" y1="2" x2="12" y2="6"></line>
+          <line x1="12" y1="18" x2="12" y2="22"></line>
+          <line x1="4.93" y1="4.93" x2="7.76" y2="7.76"></line>
+          <line x1="16.24" y1="16.24" x2="19.07" y2="19.07"></line>
+          <line x1="2" y1="12" x2="6" y2="12"></line>
+          <line x1="18" y1="12" x2="22" y2="12"></line>
+          <line x1="4.93" y1="19.07" x2="7.76" y2="16.24"></line>
+          <line x1="16.24" y1="7.76" x2="19.07" y2="4.93"></line>
+        </svg>
+        <span>Instant swap and transfer on BNB Chain</span>
+      </li>
+      <li class="flex items-center justify-center space-x-3">
+        <svg class="h-6 w-6 icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v14z"></path>
+          <line x1="1" y1="10" x2="23" y2="10"></line>
+        </svg>
+        <span>Compatible with all leading wallets & DEXs</span>
+      </li>
     </ul>
 
-    <div class="links">
-      <a href="https://github.com/zedxion-usdtz/USDT.z" target="_blank">GitHub</a>
-      <a href="https://scan.zedscan.net/" target="_blank">Explorer</a>
-      <a href="https://t.me/zedxion" target="_blank">Telegram</a>
-      <a href="https://zedxion-usdtz.github.io/USDT.z/whitepaper.html" target="_blank">WhitePaper</a>
-      <a href="#" target="_blank">Docs</a>
-      <a href="mailto:contact@zed.com">Contact</a>
+    <!-- Links Section -->
+    <div class="links flex flex-wrap justify-center gap-6 mt-8">
+      <a href="https://github.com/zedxion-usdtz/USDT.z" target="_blank" class="text-zinc-400 hover:text-amber-500 font-semibold transition-colors duration-200">GitHub</a>
+      <a href="https://scan.zedscan.net/" target="_blank" class="text-zinc-400 hover:text-amber-500 font-semibold transition-colors duration-200">Explorer</a>
+      <a href="https://t.me/zedxion" target="_blank" class="text-zinc-400 hover:text-amber-500 font-semibold transition-colors duration-200">Telegram</a>
+      <a href="https://zedxion-usdtz.github.io/USDT.z/whitepaper.html" target="_blank" class="text-zinc-400 hover:text-amber-500 font-semibold transition-colors duration-200">WhitePaper</a>
+      <a href="#" target="_blank" class="text-zinc-400 hover:text-amber-500 font-semibold transition-colors duration-200">Docs</a>
+      <a href="mailto:contact@zed.com" class="text-zinc-400 hover:text-amber-500 font-semibold transition-colors duration-200">Contact</a>
     </div>
 
-    <div class="footer">
+    <!-- Footer Section -->
+    <div class="footer text-center text-xs text-zinc-500 mt-10">
       &copy; 2025 USDT.z &mdash; Luxury Edition on ZED20 / BNB Smart Chain. <br>
       MIT License. Powered by ZEDXION technology.
     </div>
   </div>
 
   <script>
+    // Custom modal instead of alert()
+    function showModal(title, message) {
+      const existingModal = document.querySelector('.custom-modal');
+      if (existingModal) existingModal.remove();
+
+      const modalHTML = `
+        <div class="custom-modal fixed inset-0 flex items-center justify-center z-50 p-4 bg-zinc-950 bg-opacity-80 backdrop-blur-sm">
+          <div class="bg-zinc-900 p-6 rounded-2xl shadow-xl text-center max-w-sm w-full border border-zinc-700 animate-fade-in">
+            <p class="text-xl font-bold text-zinc-200">${title}</p>
+            <p class="mt-3 text-zinc-400">${message}</p>
+            <button onclick="document.querySelector('.custom-modal').remove()" class="mt-6 px-8 py-3 bg-amber-500 hover:bg-amber-600 text-zinc-900 font-bold rounded-full transition-colors duration-200">
+              OK
+            </button>
+          </div>
+        </div>
+      `;
+      document.body.insertAdjacentHTML('beforeend', modalHTML);
+    }
+
+    // Function to add the token to the user's wallet
     function addToWallet() {
       const tokenAddress = "0x27309d02f47D04bA89689fC5821558667fDCf817";
       const tokenSymbol = "USDT.z";
       const tokenDecimals = 6;
-      const tokenImage = "logo-zedxion.png"; // Burada png faylının adını göstər
+      // Using the provided logo URL
+      const tokenImage = "https://zedxion-usdtz.github.io/USDT.z/logo-zedxion.PNG";
 
       if (window.ethereum) {
         window.ethereum.request({
@@ -62,8 +206,38 @@
           }
         });
       } else {
-        alert('MetaMask not found! Please install MetaMask extension.');
+        showModal('MetaMask tapılmadı!', 'Zəhmət olmasa, bu funksiyadan istifadə etmək üçün MetaMask uzantısını quraşdırın.');
+      }
+    }
+
+    // Function to copy the token address to the clipboard
+    function copyToClipboard() {
+      const tokenAddress = document.getElementById('tokenAddr').innerText;
+      const copyMessage = document.getElementById('copyMessage');
+      
+      // Use the modern Clipboard API
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(tokenAddress).then(() => {
+          copyMessage.innerText = 'Kopyalandı!';
+          copyMessage.style.opacity = '1';
+          setTimeout(() => { copyMessage.style.opacity = '0'; }, 2000);
+        }).catch(err => {
+          console.error('Kopyalama uğursuz oldu: ', err);
+        });
+      } else {
+        // Fallback for older browsers
+        const tempInput = document.createElement('textarea');
+        tempInput.value = tokenAddress;
+        document.body.appendChild(tempInput);
+        tempInput.select();
+        document.execCommand('copy');
+        document.body.removeChild(tempInput);
+
+        copyMessage.innerText = 'Kopyalandı!';
+        copyMessage.style.opacity = '1';
+        setTimeout(() => { copyMessage.style.opacity = '0'; }, 2000);
       }
     }
   </script>
 </body>
+</html>
