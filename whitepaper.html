@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zedxion - Whitepaper</title>
+    <!-- Tailwind CSS CDN for a luxury, modern design -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .luxury-bg {
+            background-color: #0d1117;
+            background-image: radial-gradient(at 0% 0%, #1e2a38 0%, #0d1117 70%);
+        }
+        .gradient-text {
+            background: linear-gradient(90deg, #d4af37, #f0e68c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .section-separator {
+            background: linear-gradient(90deg, transparent, #d4af37, transparent);
+            height: 1px;
+        }
+        .card {
+            background: #161b22;
+            border: 1px solid #2f363d;
+        }
+        .hover-lift {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        .hover-lift:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+    </style>
+</head>
+<body class="luxury-bg text-gray-300 antialiased">
+
+    <!-- Hero Section -->
+    <header class="py-24 text-center px-4">
+        <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight mb-4">
+            <span class="gradient-text">ZEDXION</span>
+            <span class="block text-gray-100">Whitepaper</span>
+        </h1>
+        <p class="text-xl md:text-2xl text-gray-400 max-w-3xl mx-auto">
+            Accelerating mass adoption of decentralized finance and crypto payments for real-world users.
+        </p>
+    </header>
+
+    <main class="container mx-auto px-4 py-12 space-y-24">
+        <!-- Overview Section -->
+        <section>
+            <div class="section-separator mb-16"></div>
+            <h2 class="text-4xl font-bold mb-8 gradient-text">1. Overview</h2>
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="space-y-6">
+                    <p class="text-lg leading-relaxed">
+                        Zedxion (ZEDXION) is an **EVM-compatible**, open blockchain platform designed to accelerate the adoption of mass cryptocurrency payments and decentralized finance (DeFi) services by everyday users. The project was initiated in 2019 by the Colu team, which aimed to bring local currencies onto the blockchain.
+                    </p>
+                    <p class="text-lg leading-relaxed">
+                        The whitepaper highlights a number of key problems with the current financial landscape:
+                    </p>
+                    <ul class="list-disc list-inside space-y-2 text-gray-400 pl-4">
+                        <li>The current financial system fails to provide a large portion of the global population with fast, low-cost access to payments and financial services.</li>
+                        <li>Hundreds of millions of people in developing countries are deprived of basic banking services and rely on unstable fiat currencies.</li>
+                        <li>While cryptocurrencies offer the potential for anyone to make decentralized payments, the user experience of existing crypto products is often complex, primarily targeting wealthy and technically savvy users.</li>
+                    </ul>
+                </div>
+                <div class="space-y-6">
+                    <p class="text-lg leading-relaxed">
+                        The Zedxion platform's objective is to bring cryptocurrency payments and DeFi services to a wider user base through convenient, mobile-centric tools. The platform is structured around three core components:
+                    </p>
+                    <ol class="list-decimal list-inside space-y-2 text-gray-400 pl-4">
+                        <li>**The ZEDXION Blockchain:** An EVM-compatible, open, and permissionless blockchain that forms the backbone of the ecosystem.</li>
+                        <li>**The Mobile-Centric Open Source Tech Stack:** A collection of tools for businesses and developers to integrate cryptocurrencies into real-world payment scenarios, currently offered as the ZEDXION Charge API.</li>
+                        <li>**Reference DeFi Products:** Example applications that support the platform's initial adoption.</li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+
+        <!-- ZEDXION Blockchain & Consensus -->
+        <section>
+            <div class="section-separator mb-16"></div>
+            <h2 class="text-4xl font-bold mb-8 gradient-text">2. ZEDXION Blockchain & Consensus</h2>
+            <div class="grid md:grid-cols-2 gap-12">
+                <div class="space-y-6">
+                    <p class="text-lg leading-relaxed">
+                        The ZEDXION blockchain is an open blockchain compatible with the Ethereum Virtual Machine (EVM), featuring **5-second block intervals**.
+                    </p>
+                    <ul class="list-disc list-inside space-y-2 text-gray-400 pl-4">
+                        <li>**Delegated Proof of Stake (dPoS):** For network security, validators and their delegators must stake a minimum of 10,000 ZEDX. The maximum number of validators is 100, and they are rewarded with new ZEDX tokens and transaction fees for creating and validating blocks.</li>
+                        <li>**Sybil Defense:** The high staking requirement prevents a single actor from creating numerous validators, and stakes can be frozen in case of validator misconduct.</li>
+                        <li>**Consensus Model Evolution:** Since block 100, the network has transitioned from an AuRa model to a Proof of Stake (PoS) mechanism. The PoS model selects validators based on their stake amount, enhancing security and decentralization.</li>
+                        <li>**Network Capacity:** ZEDXION can process approximately 120 native token transfers and 60 ZED-20 token transfers per second, with each transaction costing less than $0.01 USD.</li>
+                    </ul>
+                </div>
+                <div class="space-y-6">
+                    <p class="text-lg leading-relaxed">
+                        Key parameters for connecting to the network are provided for developers and users:
+                    </p>
+                    <div class="bg-gray-800 p-6 rounded-xl shadow-lg border border-gray-700">
+                        <ul class="space-y-4 text-sm font-mono">
+                            <li><span class="font-bold text-yellow-400">Network Name:</span> ZEDXION</li>
+                            <li><span class="font-bold text-yellow-400">Chain ID:</span> 83872</li>
+                            <li><span class="font-bold text-yellow-400">Official RPC Endpoint:</span> <a href="https://mainnet-rpc.zedscan.net/" class="text-blue-400 hover:underline">https://mainnet-rpc.zedscan.net/</a></li>
+                            <li><span class="font-bold text-yellow-400">Blockchain Explorer:</span> <a href="https://zedscan.net" class="text-blue-400 hover:underline">zedscan.net</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ZEDX Token & Economy -->
+        <section>
+            <div class="section-separator mb-16"></div>
+            <h2 class="text-4xl font-bold mb-8 gradient-text">3. The ZEDX Token & Economy</h2>
+            
+            <div class="space-y-12">
+                <!-- Token Role -->
+                <div class="card p-8 rounded-xl shadow-lg hover-lift">
+                    <h3 class="text-2xl font-semibold mb-4 text-yellow-400">Token's Role</h3>
+                    <p class="text-lg leading-relaxed mb-4">
+                        ZEDX is the native currency of the ZEDXION blockchain with several use cases:
+                    </p>
+                    <ul class="list-disc list-inside space-y-2 text-gray-400 pl-4">
+                        <li>**Transaction Fees:** Used as gas for operations on the network.</li>
+                        <li>**Validator Staking:** A minimum of 10,000 ZEDX is required to become a validator, with approximately 60 validators currently active.</li>
+                        <li>**Voting:** Validators vote on protocol changes and FIP (Zedxion Improvement Proposals) proposals based on their stake.</li>
+                        <li>**Delegation:** Users can delegate any amount of tokens to any validator and receive a share of the block rewards. The minimum validator commission is currently 15%.</li>
+                        <li>**Payments:** As a native token, ZEDX can be transferred without needing smart contract calls, making transactions faster and cheaper.</li>
+                    </ul>
+                    <p class="text-md leading-relaxed text-gray-500 mt-4">
+                        The whitepaper states that token ownership does not in itself grant any rights to the governance or revenue streams of the Zedxion platform.
+                    </p>
+                </div>
+
+                <!-- Supply & Inflation Model -->
+                <div class="card p-8 rounded-xl shadow-lg hover-lift">
+                    <h3 class="text-2xl font-semibold mb-4 text-yellow-400">Supply & Inflation Model</h3>
+                    <p class="text-lg leading-relaxed">
+                        A new block is created every 5 seconds, generating inflation by paying new ZEDX to validators and delegators. An annual increase of approximately **5%** was chosen to ensure a stable income for validators and delegators, keeping transaction fees very low. A future FIP proposal aims to reduce inflation to 2% and introduce a fixed emission in subsequent years.
+                    </p>
+                </div>
+
+                <!-- Wrapped Tokens -->
+                <div class="card p-8 rounded-xl shadow-lg hover-lift">
+                    <h3 class="text-2xl font-semibold mb-4 text-yellow-400">Wrapped Tokens</h3>
+                    <p class="text-lg leading-relaxed mb-4">
+                        For interoperability, wrapped versions of the ZEDX token have been created. These are ZED-20 standard tokens. Users can lock their tokens on the ZEDXION network and receive equivalent wrapped tokens on another chain.
+                    </p>
+                    <ul class="list-disc list-inside space-y-2 text-gray-400 pl-4">
+                        <li>**Ethereum (ERC-20):** Contract address <span class="font-mono text-xs">0xc766898c477306c23ea74646C03d34e242946AbA</span></li>
+                        <li>**Binance Smart Chain (BEP-20):** Contract address <span class="font-mono text-xs">0x567556a7493fb7a22d2fd158dd4c766a98705f96</span></li>
+                        <li>**ZEDXION Network (ZED-20):** Contract address <span class="font-mono text-xs">0x3f7be9db9d37bd89c3fa722bb29ba17300c18fc8</span></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interoperability & Scaling -->
+        <section>
+            <div class="section-separator mb-16"></div>
+            <h2 class="text-4xl font-bold mb-8 gradient-text">4. Interoperability & Scaling</h2>
+            <div class="grid md:grid-cols-2 gap-12">
+                <div class="space-y-6">
+                    <h3 class="text-2xl font-semibold mb-2 text-yellow-400">Bridges & Wrapped Tokens</h3>
+                    <p class="text-lg leading-relaxed">
+                        The Zedxion team is actively working on various multichain bridges and transfer protocols, including Multichain, Connext, Voltage Bridge, and Elk Finance, to enhance network interoperability.
+                    </p>
+                </div>
+                <div class="space-y-6">
+                    <h3 class="text-2xl font-semibold mb-2 text-yellow-400">Optimistic Rollups & FL2P</h3>
+                    <p class="text-lg leading-relaxed">
+                        To further increase the platform's scalability, the team is researching optimistic rollup solutions (Arbitrum and Optimism) and a mobile SDK called Flutter Layer 2 Payments (FL2P), which is based on zero-knowledge proofs. ZK rollup-based FL2P will integrate into ZEDXION wallets to process the majority of mobile payments on a secondary layer.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Governance & Development -->
+        <section>
+            <div class="section-separator mb-16"></div>
+            <h2 class="text-4xl font-bold mb-8 gradient-text">5. Governance & Development</h2>
+            
+            <div class="card p-8 rounded-xl shadow-lg hover-lift">
+                <h3 class="text-2xl font-semibold mb-4 text-yellow-400">Governance Structure</h3>
+                <p class="text-lg leading-relaxed mb-4">
+                    The whitepaper indicates that the Zedxion platform is moving towards decentralization. The current governance is split between three entities:
+                </p>
+                <ul class="list-disc list-inside space-y-4 text-gray-400 pl-4">
+                    <li>
+                        <span class="font-semibold text-white">Network Validators:</span> They vote on the adoption of FIPs (Zedxion Improvement Proposals). Currently, each validator's vote is equal, but a future mechanism based on stake share is planned.
+                    </li>
+                    <li>
+                        <span class="font-semibold text-white">ZEDXION Foundation & Project Team:</span> Manages core protocol development and the "genesis" ZEDX fund, while building mobile-centric infrastructure and ecosystem partnerships.
+                    </li>
+                    <li>
+                        <span class="font-semibold text-white">ZEDXION Assembly:</span> An advisory body composed of active community members. The Assembly manages the ZEDXION Forum, implements the Snapshot voting mechanism, and manages the community token fund, which is replenished with 200,000 ZEDX monthly for grants, bounties, and marketing.
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Ecosystem & Business Tools -->
+        <section>
+            <div class="section-separator mb-16"></div>
+            <h2 class="text-4xl font-bold mb-8 gradient-text">6. Ecosystem & Business Tools</h2>
+            <div class="space-y-12">
+                <p class="text-lg leading-relaxed">
+                    The whitepaper describes Zedxion as an "alternative rail for the global payments industry." The platform’s goal is to make crypto payments as simple as bank applications via mobile apps. ZEDXION Studio and ZEDXION Wallet are key tools for businesses and organizations, enabling them to issue their own tokens, open on-ramps for users, and manage token communities.
+                </p>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="card p-6 rounded-xl shadow-lg hover-lift">
+                        <h3 class="text-xl font-semibold mb-3 text-yellow-400">Key Infrastructure</h3>
+                        <ul class="list-disc list-inside space-y-1 text-gray-400">
+                            <li>RPC Endpoints</li>
+                            <li>Zedxion Explorer</li>
+                            <li>Third-party services like Pocket Network, The Graph, Chainlink, and DIA.</li>
+                        </ul>
+                    </div>
+                    <div class="card p-6 rounded-xl shadow-lg hover-lift">
+                        <h3 class="text-xl font-semibold mb-3 text-yellow-400">Payments & DeFi</h3>
+                        <ul class="list-disc list-inside space-y-1 text-gray-400">
+                            <li>Payment-centric apps like Peepl and GoodDollar.</li>
+                            <li>DeFi platforms like Voltage Finance, Sushi, and Beefy Finance.</li>
+                        </ul>
+                    </div>
+                    <div class="card p-6 rounded-xl shadow-lg hover-lift">
+                        <h3 class="text-xl font-semibold mb-3 text-yellow-400">NFTs & Gaming</h3>
+                        <ul class="list-disc list-inside space-y-1 text-gray-400">
+                            <li>Marketplaces: Artrific, tofuNFT</li>
+                            <li>Collections: Cozy Cosmonauts, Fuse Foxes</li>
+                            <li>Metaverse: Tollan Worlds</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Use Cases -->
+        <section>
+            <div class="section-separator mb-16"></div>
+            <h2 class="text-4xl font-bold mb-8 gradient-text">7. Real-world Applications & Use Cases</h2>
+            <div class="space-y-12">
+                <div class="card p-8 rounded-xl shadow-lg hover-lift">
+                    <h3 class="text-2xl font-semibold mb-4 text-yellow-400">Stable Currency for a Local Economy</h3>
+                    <p class="text-lg leading-relaxed">
+                        The Kolektivo project in Curaçao uses Zedxion Studio to issue a stable token, CuraDAI (based on DAI), for purchasing local goods. This demonstrates how easy and cheap it is to create token communities.
+                    </p>
+                </div>
+                <div class="card p-8 rounded-xl shadow-lg hover-lift">
+                    <h3 class="text-2xl font-semibold mb-4 text-yellow-400">Customer Reward & Food Delivery</h3>
+                    <p class="text-lg leading-relaxed">
+                        The PeeplEat project in Liverpool incentivizes customer loyalty with PEEPL tokens for every order. The automated and transparent reward mechanism highlights the advantages of Zedxion's technology.
+                    </p>
+                </div>
+                <div class="card p-8 rounded-xl shadow-lg hover-lift">
+                    <h3 class="text-2xl font-semibold mb-4 text-yellow-400">Festival Payments</h3>
+                    <p class="text-lg leading-relaxed">
+                        Bitazza created a special mobile app and MYST token for the Mystic Valley festival in Thailand, handling over 15,000 transactions on the Zedxion network. This showcased a cheaper and more effective payment infrastructure compared to old plastic token or card systems.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Conclusion -->
+        <section>
+            <div class="section-separator mb-16"></div>
+            <h2 class="text-4xl font-bold mb-8 gradient-text">8. Conclusion</h2>
+            <p class="text-lg leading-relaxed max-w-4xl mx-auto text-center">
+                The Zedxion (ZEDXION) whitepaper thoroughly presents the platform's goals, technical architecture, token economy, and ecosystem strategy. The project aims to create mobile-centric crypto infrastructure to make global payment systems more inclusive and affordable. By using a dPoS/PoS consensus model, the blockchain ensures high speed and low transaction fees, while the ZEDX token is used for network payments, staking, and voting. The platform enhances connectivity with other networks through extensive interoperability tools, wrapped tokens, and rollup-based scaling research. The governance model is gradually evolving towards a decentralized structure where validators and community members have a greater say.
+            </p>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="text-center py-8 text-gray-500">
+        <p>&copy; 2024 Zedxion. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
