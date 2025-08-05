@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>USDT ↔ USDT.z SWAP</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Tailwind CSS CDN for modern styling -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Ethers.js CDN for blockchain interaction -->
+  <script src="https://cdn.jsdelivr.net/npm/ethers@6.10.0/dist/ethers.umd.min.js"></script>
+  <style>
+    /* Custom font for a professional and clean look */
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-br from-gray-900 to-gray-800 flex items-center justify-center min-h-screen p-4">
+  <div class="swap-box bg-gray-800 p-8 rounded-3xl shadow-2xl max-w-md w-full border border-gray-700">
+    <h2 class="mb-6 text-white tracking-wide text-3xl font-semibold text-center">USDT ↔ USDT.z Swap</h2>
+    <div class="info text-gray-400 text-base mb-6 text-center">
+      1 USDT = 100 USDT.z<br>
+      Minimum swap: 100 USDT
+    </div>
+
+    <!-- Swap Direction Selection -->
+    <label for="direction" class="font-medium text-gray-300 text-lg block mb-2">Swap Direction:</label>
+    <select id="direction" onchange="setLabel()" class="w-full mb-6 p-3.5 text-lg rounded-xl border border-gray-600 bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200 appearance-none pr-8">
+      <option value="usdtToUsdtz">USDT → USDT.z</option>
+      <option value="usdtzToUsdt">USDT.z → USDT</option>
+    </select>
+
+    <!-- Amount Input -->
+    <label id="amountLabel" for="amount" class="font-medium text-gray-300 text-lg block mb-2">USDT Amount:</label>
+    <input type="number" id="amount" placeholder="Enter Amount" min="0" step="any"
+           class="w-full mb-6 p-3.5 text-lg rounded-xl border border-gray-600 bg-gray-700 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200" />
+
+    <!-- Swap Button -->
+    <button class="btn w-full py-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white border-none rounded-xl text-xl font-bold cursor-pointer mb-6
+                   shadow-lg hover:shadow-xl hover:from-blue-700 hover:to-blue-800 transition-all duration-300 disabled:from-gray-500 disabled:to-gray-600 disabled:cursor-not-allowed disabled:shadow-none"
+            onclick="swap()" id="swapBtn">
+      Swap
+    </button>
+
+    <!-- Result Display Area -->
+    <div id="result" class="min-h-8 text-blue-300 text-base text-center break-words"></div>
+  </div>
+
+  <script>
+    // Contract addresses for the swap functionality and ERC20 tokens
+    const swapContractAddress = "0x400f395b35b1a81696df6c69abd9a52bd58947c8";
+    const usdtAddress = "0x55d398326f99059fF775485246999027B3197955";
+    const usdtzAddress = "0x27309d02f47d04ba89689fc5821558667fdcf817";
+
+    // ABI (Application Binary Interface) for the swap contract
+    const swapAbi = [
+      "function swapUsdtToUsdtz(uint256 amount) external",
+      "function swapUsdtzToUsdt(uint256 amount) external",
+      "function rate() view returns (uint256)",
+      "function minSwapAmount() view returns (uint256)"
+    ];
+
+    // ABI for standard ERC20 token functions (approve, allowance, decimals)
+    const erc20Abi = [
+      "function approve(address spender, uint256 amount) external returns (bool)",
+      "function allowance(address owner, address spender) view returns (uint256)",
+      "function decimals() view returns (uint8)"
+    ];
+
+    /**
+     * Handles the swap operation between USDT and USDT.z.
+     * It checks for Metamask, connects, gets signer, checks allowance, approves if needed, and then performs the swap.
+     */
+    async function swap() {
+      const swapBtn = document.getElementById("swapBtn");
+      const resultDiv = document.getElementById("result");
+
+      // Clear previous messages and disable button
+      resultDiv.innerText = "";
+      swapBtn.disabled = true;
+      swapBtn.innerText = "Processing...";
+
+      try {
+        // Check if Metamask (or similar Ethereum provider) is available
+        if (!window.ethereum) {
+          throw new Error("Metamask not found! Please install Metamask to use this application.");
+        }
+
+        // Initialize ethers provider and signer
+        const provider = new ethers.BrowserProvider(window.ethereum);
+        await provider.send("eth_requestAccounts", []); // Request user's accounts
+        const signer = await provider.getSigner(); // Get the signer (user's connected account)
+
+        // Initialize the swap contract with the signer
+        const swapContract = new ethers.Contract(swapContractAddress, swapAbi, signer);
+
+        const direction = document.getElementById('direction').value;
+        let amountInput = document.getElementById('amount').value;
+
+        // Validate the input amount
+        if (!amountInput || isNaN(amountInput) || Number(amountInput) <= 0) {
+          throw new Error("Please enter a valid amount greater than zero.");
+        }
+        const amount = Number(amountInput);
+
+        let tokenAddress, swapFunction;
+        const minimumSwapAmount = 100; // Hardcoded minimum swap amount as per info div
+
+        // Determine token address and swap function based on direction
+        if (direction === "usdtToUsdtz") {
+          tokenAddress = usdtAddress;
+          swapFunction = swapContract.swapUsdtToUsdtz;
+          if (amount < minimumSwapAmount) {
+            throw new Error(`Minimum ${minimumSwapAmount} USDT can be swapped.`);
+          }
+        } else {
+          tokenAddress = usdtzAddress;
+          swapFunction = swapContract.swapUsdtzToUsdt;
+          if (amount < minimumSwapAmount) {
+            throw new Error(`Minimum ${minimumSwapAmount} USDT.z can be swapped.`);
+          }
+        }
+
+        // Initialize the ERC20 token contract
+        const token = new ethers.Contract(tokenAddress, erc20Abi, signer);
+        const decimals = await token.decimals(); // Get token decimals for correct unit conversion
+        const amountWei = ethers.parseUnits(amount.toString(), decimals); // Convert amount to Wei
+
+        // Check and handle token allowance
+        const userAddress = await signer.getAddress();
+        const allowance = await token.allowance(userAddress, swapContractAddress);
+
+        if (allowance < amountWei) {
+          resultDiv.innerText = "Approval required. Please confirm the transaction in Metamask...";
+          const approveTx = await token.approve(swapContractAddress, amountWei);
+          resultDiv.innerText = "Approval transaction sent. Waiting for confirmation...";
+          await approveTx.wait(); // Wait for the approval transaction to be mined
+          resultDiv.innerText = "Approval confirmed! Now proceeding with the swap...";
+        }
+
+        // Perform the swap operation
+        resultDiv.innerText = "Swap transaction sent. Waiting for confirmation...";
+        const swapTx = await swapFunction(amountWei);
+        await swapTx.wait(); // Wait for the swap transaction to be mined
+
+        // Display success message with transaction hash
+        resultDiv.innerHTML = `✅ Swap completed successfully! <br> Tx Hash: <a href="https://bscscan.com/tx/${swapTx.hash}" target="_blank" class="text-blue-400 hover:underline">${swapTx.hash}</a>`;
+
+      } catch (err) {
+        // Handle and display errors
+        console.error("Swap Error:", err);
+        let errorMessage = "An unknown error occurred.";
+        if (err.message) {
+          errorMessage = err.message;
+          // Ethers.js specific error parsing for better user messages
+          if (errorMessage.includes("user rejected transaction")) {
+            errorMessage = "Transaction rejected by user in Metamask.";
+          } else if (errorMessage.includes("insufficient funds")) {
+            errorMessage = "Insufficient funds for the transaction.";
+          } else if (errorMessage.includes("invalid BigNumber value")) {
+            errorMessage = "Invalid amount entered. Please check your input.";
+          }
+        } else if (typeof err === 'string') {
+          errorMessage = err;
+        }
+        resultDiv.innerText = `❌ Error: ${errorMessage}`;
+      } finally {
+        // Re-enable the button and reset text after operation
+        swapBtn.disabled = false;
+        swapBtn.innerText = "Swap";
+      }
+    }
+
+    /**
+     * Dynamically updates the label for the amount input based on the selected swap direction.
+     */
+    function setLabel() {
+      const direction = document.getElementById('direction').value;
+      const amountLabel = document.getElementById('amountLabel');
+      if (direction === "usdtToUsdtz") {
+        amountLabel.innerText = "USDT Amount:";
+      } else {
+        amountLabel.innerText = "USDT.z Amount:";
+      }
+    }
+
+    // Initialize label on page load
+    window.onload = setLabel;
+  </script>
+</body>
+</html>
